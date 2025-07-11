@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>calculator</title>
+    <style>
+      input {
+        height: 150px;
+        width: 350px;
+        border: none;
+        outline: none;
+        font-size: 30px;
+      }
+      span {
+        width: 100px;
+        height: 100px;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      section {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        margin: 0 auto;
+      }
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        margin: 5px;
+        padding: 35px;
+        font-size: 18px;
+        border: none;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        color: black;
+        transition: 0.2s ease-in;
+      }
+      button:focus{
+        animation: buttonAnimation .5s forwards 1 ease-in-out;
+      }
+      @keyframes buttonAnimation{
+        0%{
+          border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        }
+        50%{
+          background-color: rgb(170, 170, 170);
+        border-radius: 20px;
+        }
+        100%{
+          border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <input type="text" id="display" style="margin: 0 auto" />
+    <section>
+      <button id="7">7</button>
+      <button id="8">8</button>
+      <button id="9">9</button>
+      <button id="DEL">DEL</button>
+      <button id="AC">AC</button>
+      <button id="4">4</button>
+      <button id="5">5</button>
+      <button id="6">6</button>
+      <button id="X">*</button>
+      <button id="/">/</button>
+      <button id="1">1</button>
+      <button id="2">2</button>
+      <button id="3">3</button>
+      <button id="+">+</button>
+      <button id="-">-</button>
+      <button id="0">0</button>
+      <button id=".">.</button>
+      <button id="equals">=</button>
+    </section>
+    <script>
+      const DEL = document.getElementById('DEL')
+      const AC = document.getElementById('AC')
+      const equals = document.getElementById('equals')
+      let input = document.getElementById('display')
+      let button = document.querySelectorAll('button')
+      button.forEach((buttons) => {
+        buttons.addEventListener('click', () => {
+          input.value += buttons.innerText
+        })
+      })
+      DEL.addEventListener('click', () => {
+        input.value = input.value.slice(0, -4)
+      })
+      AC.addEventListener('click', () => {
+        input.value = ''
+      })
+      equals.addEventListener('click', () => {
+        input.value = input.value.slice(0, -1)
+        let answer = eval(input.value)
+        input.value = ''
+        input.value = answer
+      })
+    </script>
+  </body>
+</html>
